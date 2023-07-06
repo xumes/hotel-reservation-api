@@ -1,6 +1,6 @@
-import { MissingParamError } from "../../src/@shared/errors/missing-param-error";
-import { HotelModel } from "../../src/domain/hotel";
-import { AddOneHotelRoomUsecase } from "../../src/usecases/add-hotel-one-room-available";
+import { MissingParamError } from "../../../src/@shared/errors/missing-param-error";
+import { HotelModel } from "../../../src/domain/model/hotel";
+import { AddOneHotelRoomUsecase } from "../../../src/domain/usecases/add-hotel-one-room-available";
 
 describe("Add One Hotel Room Available Usecase", () => {
   it("should throws MissingParamError when hotel id is missing", () => {

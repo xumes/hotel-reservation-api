@@ -1,5 +1,5 @@
-import { MissingParamError } from "../@shared/errors/missing-param-error";
-import { HotelModel } from "../domain/hotel";
+import { MissingParamError } from "../../@shared/errors/missing-param-error";
+import { HotelModel } from "../model/hotel";
 
 export class AddOneHotelRoomUsecase {
   execute(hotel: HotelModel): HotelModel {

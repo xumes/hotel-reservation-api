@@ -1,6 +1,6 @@
-import { MissingParamError } from "../../src/@shared/errors/missing-param-error";
-import { RoomModel, RoomStatus } from "../../src/domain/room";
-import { AddRoomUsecase } from "../../src/usecases/add-room";
+import { MissingParamError } from "../../../src/@shared/errors/missing-param-error";
+import { RoomModel, RoomStatus } from "../../../src/domain/model/room";
+import { AddRoomUsecase } from "../../../src/domain/usecases/add-room";
 
 describe("Add Room Usecase", () => {
   it("should throw MissingParamError when data is invalid", () => {

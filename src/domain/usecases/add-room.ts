@@ -1,5 +1,5 @@
-import { MissingParamError } from "../@shared/errors/missing-param-error";
-import { RoomModel, RoomStatus } from "../domain/room";
+import { MissingParamError } from "../../@shared/errors/missing-param-error";
+import { RoomModel, RoomStatus } from "../model/room";
 
 export class AddRoomUsecase {
   execute(roomProps: RoomModel): RoomModel {

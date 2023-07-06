@@ -1,11 +1,11 @@
 import { validate } from "uuid";
-import { MissingParamError } from "../../src/@shared/errors/missing-param-error";
+import { MissingParamError } from "../../../src/@shared/errors/missing-param-error";
 import {
   AddHotelModel,
   AddressModel,
   HotelModel,
-} from "../../src/domain/hotel";
-import { AddHotelUseCase } from "../../src/usecases/add-hotel";
+} from "../../../src/domain/model/hotel";
+import { AddHotelUseCase } from "../../../src/domain/usecases/add-hotel";
 
 describe("Add Hotel Usecase", () => {
   it("should throw MissingParamError when hotel name is not provided", () => {
