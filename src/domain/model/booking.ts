@@ -1,4 +1,4 @@
-export interface BookModel {
+export interface BookingModel {
   roomNumber: number;
   startDate: Date;
   endDate: Date;
