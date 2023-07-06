@@ -6,5 +6,5 @@ export enum RoomStatus {
 export interface RoomModel {
   number: number;
   price: number;
-  status: string;
+  status: RoomStatus;
 }
