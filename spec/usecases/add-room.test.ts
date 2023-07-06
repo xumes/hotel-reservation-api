@@ -7,6 +7,7 @@ describe("Add Room Usecase", () => {
     const testCases = [
       { price: 1, status: RoomStatus.AVAILABLE },
       { number: 1, status: RoomStatus.AVAILABLE },
+      { number: 0, status: RoomStatus.AVAILABLE },
       { number: 1, price: -1, status: RoomStatus.AVAILABLE },
       { number: 1, price: 2 },
       { number: 1, price: 2, status: "invalid-status" },
