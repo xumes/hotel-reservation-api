@@ -1,6 +1,10 @@
 import { validate } from "uuid";
 import { MissingParamError } from "../../src/@shared/errors/missing-param-error";
-import { AddHotelModel, AddressModel } from "../../src/domain/hotel";
+import {
+  AddHotelModel,
+  AddressModel,
+  HotelModel,
+} from "../../src/domain/hotel";
 import { AddHotelUseCase } from "../../src/usecases/add-hotel";
 
 describe("Add Hotel Usecase", () => {
@@ -54,7 +58,7 @@ describe("Add Hotel Usecase", () => {
     });
   });
 
-  it("should return an ID on success", () => {
+  it("should create a Hotel on success", () => {
     const addHotelUseCase = new AddHotelUseCase();
 
     const validHotelData = {
@@ -62,9 +66,16 @@ describe("Add Hotel Usecase", () => {
       address: { street: "street name", zipCode: "zip", country: "Bra" },
     };
 
-    const id = addHotelUseCase.execute(validHotelData);
+    const hotel: HotelModel = addHotelUseCase.execute(validHotelData);
 
-    expect(id).toBeTruthy();
-    expect(validate(id)).toBe(true);
+    expect(hotel.id).toBeTruthy();
+    expect(validate(hotel.id)).toBe(true);
+
+    expect(hotel.name).toBe(validHotelData.name);
+
+    expect(hotel.address).toStrictEqual(validHotelData.address);
+
+    expect(hotel.roomsAvailable).toBe(0);
+    expect(hotel.roomsBooked).toBe(0);
   });
 });
