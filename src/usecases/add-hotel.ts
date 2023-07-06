@@ -1,3 +1,4 @@
+import { v4 as uuidv4 } from "uuid";
 import { MissingParamError } from "../@shared/errors/missing-param-error";
 import { AddHotelModel, AddressModel } from "../domain/hotel";
 
@@ -12,7 +13,7 @@ export class AddHotelUseCase {
       throw new MissingParamError("Hotel name is required");
     }
 
-    return "123";
+    return uuidv4();
   }
 
   private validateAddress(addressProps: AddressModel): boolean {
