@@ -1,13 +1,13 @@
 import { MissingParamError } from "../../src/@shared/errors/missing-param-error";
-import { RoomModel } from "../../src/domain/room";
+import { RoomModel, RoomStatus } from "../../src/domain/room";
 import { AddRoomUsecase } from "../../src/usecases/add-room";
 
 describe("Add Room Usecase", () => {
   it("should throw MissingParamError when data is invalid", () => {
     const testCases = [
-      { price: 1, status: "ok" },
-      { number: 1, status: "ok" },
-      { number: 1, price: -1, status: "ok" },
+      { price: 1, status: RoomStatus.AVAILABLE },
+      { number: 1, status: RoomStatus.AVAILABLE },
+      { number: 1, price: -1, status: RoomStatus.AVAILABLE },
       { number: 1, price: 2 },
       { number: 1, price: 2, status: "invalid-status" },
     ];
@@ -21,5 +21,18 @@ describe("Add Room Usecase", () => {
         addRoomUsecase.execute(fakeRoomProps as RoomModel)
       ).toThrowError(MissingParamError);
     });
+  });
+
+  it("should return a room on success", () => {
+    const validRoom = {
+      number: 1,
+      price: 2,
+      status: RoomStatus.AVAILABLE,
+    };
+
+    const addRoomUsecase = new AddRoomUsecase();
+    const room = addRoomUsecase.execute(validRoom);
+
+    expect(room).toStrictEqual(validRoom);
   });
 });
