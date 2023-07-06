@@ -3,3 +3,9 @@ export interface BookingModel {
   startDate: Date;
   endDate: Date;
 }
+
+export interface BookingProps {
+  roomNumber: number;
+  startDate: string;
+  endDate: string;
+}
