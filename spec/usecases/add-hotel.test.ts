@@ -1,9 +1,6 @@
+import { validate } from "uuid";
 import { MissingParamError } from "../../src/@shared/errors/missing-param-error";
-import {
-  AddHotelModel,
-  AddressModel,
-  HotelModel,
-} from "../../src/domain/hotel";
+import { AddHotelModel, AddressModel } from "../../src/domain/hotel";
 import { AddHotelUseCase } from "../../src/usecases/add-hotel";
 
 describe("Add Hotel Usecase", () => {
@@ -68,5 +65,6 @@ describe("Add Hotel Usecase", () => {
     const id = addHotelUseCase.execute(validHotelData);
 
     expect(id).toBeTruthy();
+    expect(validate(id)).toBe(true);
   });
 });
