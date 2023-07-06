@@ -3,7 +3,7 @@ export enum RoomStatus {
   UNAVAILABLE = "UNAVAILABLE",
 }
 
-export interface Room {
+export interface RoomModel {
   number: number;
   price: number;
   status: string;
