@@ -1,5 +1,10 @@
 import { MissingParamError } from "../../@shared/errors/missing-param-error";
-import { RoomModel, RoomStatus } from "../model/room";
+import { RoomModel } from "../model/room";
+import {
+  validateRoomNumber,
+  validateRoomPrice,
+  validateRoomStatus,
+} from "../validators/room-validators";
 
 export class AddRoomUsecase {
   execute(roomProps: RoomModel): RoomModel {
@@ -12,19 +17,11 @@ export class AddRoomUsecase {
 
   private validate(roomProps: RoomModel) {
     const { number, price, status } = roomProps;
-    if (!number || number <= 0) {
-      return false;
-    }
-    if (!price || price <= 0) {
-      return false;
-    }
-    if (!status) {
-      return false;
-    }
-    if (!Object.values(RoomStatus).includes(status)) {
-      return false;
-    }
-
-    return true;
+    return (
+      // return true is all validators return true
+      validateRoomNumber(number) &&
+      validateRoomPrice(price) &&
+      validateRoomStatus(status)
+    );
   }
 }
