@@ -8,7 +8,7 @@ import {
 import { AddHotelUseCase } from "../../src/usecases/add-hotel";
 
 describe("Add Hotel Usecase", () => {
-  it("should return MissingParamError when hotel name is not provided", () => {
+  it("should throw MissingParamError when hotel name is not provided", () => {
     const testCases = [
       { name: "" },
       { name: null },
@@ -34,7 +34,7 @@ describe("Add Hotel Usecase", () => {
     });
   });
 
-  it("should return MissingParamError when address is not provided", () => {
+  it("should throw MissingParamError when address is not provided", () => {
     const testCases = [
       { address: { street: "" }, name: "Hotel name" },
       { address: { street: "Street name", zipCode: "" }, name: "Hotel name" },
