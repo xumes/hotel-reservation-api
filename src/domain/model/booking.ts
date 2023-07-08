@@ -11,7 +11,10 @@ export interface BookingModel {
   hotel: HotelModel;
 }
 
+export type AddBookingModel = Omit<BookingModel, "id">;
+
 export interface BookingProps {
+  hotelId: string;
   roomNumber: number;
   startDate: string;
   endDate: string;

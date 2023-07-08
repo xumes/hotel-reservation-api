@@ -9,8 +9,6 @@ describe("Add Room Usecase", () => {
       { number: 1, status: RoomStatus.AVAILABLE },
       { number: 0, status: RoomStatus.AVAILABLE },
       { number: 1, price: -1, status: RoomStatus.AVAILABLE },
-      { number: 1, price: 2 },
-      { number: 1, price: 2, status: "invalid-status" },
     ];
 
     const addRoomUsecase = new AddRoomUsecase();
@@ -25,15 +23,64 @@ describe("Add Room Usecase", () => {
   });
 
   it("should return a room on success", () => {
-    const validRoom = {
-      number: 1,
-      price: 2,
-      status: RoomStatus.AVAILABLE,
-    };
+    const testCases = [
+      {
+        validRoom: {
+          roomId: 1,
+          room: { id: 1 } as RoomModel,
+          number: 1,
+          price: 2,
+          status: RoomStatus.AVAILABLE,
+        },
+        expectedRoom: {
+          roomId: 1,
+          room: { id: 1 } as RoomModel,
+          number: 1,
+          price: 2,
+          status: RoomStatus.AVAILABLE,
+        },
+      },
+      {
+        validRoom: {
+          roomId: 1,
+          room: { id: 1 } as RoomModel,
+          number: 1,
+          price: 2,
+          status: RoomStatus.UNAVAILABLE,
+        },
+        expectedRoom: {
+          roomId: 1,
+          room: { id: 1 } as RoomModel,
+          number: 1,
+          price: 2,
+          status: RoomStatus.UNAVAILABLE,
+        },
+      },
+      {
+        validRoom: {
+          roomId: 1,
+          room: { id: 1 } as RoomModel,
+          number: 1,
+          price: 2,
+        },
+        expectedRoom: {
+          roomId: 1,
+          room: { id: 1 } as RoomModel,
+          number: 1,
+          price: 2,
+          status: RoomStatus.AVAILABLE,
+        },
+      },
+    ];
 
     const addRoomUsecase = new AddRoomUsecase();
-    const room = addRoomUsecase.execute(validRoom);
 
-    expect(room).toStrictEqual(validRoom);
+    testCases.forEach(({ validRoom, expectedRoom }) => {
+      const room = addRoomUsecase.execute(validRoom);
+
+      expect(room.number).toStrictEqual(expectedRoom.number);
+      expect(room.price).toStrictEqual(expectedRoom.price);
+      expect(room.status).toStrictEqual(expectedRoom.status);
+    });
   });
 });

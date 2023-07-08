@@ -61,9 +61,15 @@ describe("Add Hotel Usecase", () => {
   it("should create a Hotel on success", () => {
     const addHotelUseCase = new AddHotelUseCase();
 
-    const validHotelData = {
+    const validHotelData: AddHotelModel = {
       name: "Hotel name",
-      address: { street: "street name", zipCode: "zip", country: "Bra" },
+
+      address: {
+        id: "123",
+        street: "street name",
+        zipCode: "zip",
+        country: "Bra",
+      },
     };
 
     const hotel: HotelModel = addHotelUseCase.execute(validHotelData);

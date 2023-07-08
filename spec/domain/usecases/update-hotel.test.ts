@@ -1,23 +1,24 @@
-import { validate, v4 as uuidv4 } from "uuid";
 import { MissingParamError } from "../../../src/@shared/errors/missing-param-error";
 import {
   AddHotelModel,
   AddressModel,
   HotelModel,
 } from "../../../src/domain/model/hotel";
-import { AddHotelUseCase } from "../../../src/domain/usecases/add-hotel";
 import { UpdateHotelUseCase } from "../../../src/domain/usecases/update-hotel";
+import { RoomModel } from "../../../src/domain/model/room";
 
 const existingHotel: HotelModel = {
   id: "valid-id",
   name: "Existing Hotel name",
   address: {
+    id: "valid-id",
     street: "Street name",
     zipCode: "ABC123",
     country: "Bra",
   },
   roomsAvailable: 10,
   roomsBooked: 5,
+  rooms: [] as RoomModel[],
 };
 
 describe("Update Hotel Usecase", () => {
@@ -81,6 +82,7 @@ describe("Update Hotel Usecase", () => {
     const newHotelData = {
       name: "new hotel name",
       address: {
+        id: "valid-id",
         street: "new street name",
         zipCode: "123456",
         country: "CAN",
@@ -104,6 +106,7 @@ describe("Update Hotel Usecase", () => {
     const newHotelData = {
       name: "new hotel name",
       address: {
+        id: "valid-id",
         street: "new street name",
         zipCode: "123456",
         country: "CAN",
