@@ -5,6 +5,7 @@ import {
   validateHotelName,
   validateHotelAddress,
 } from "../validators/hotel-validators";
+import { RoomModel } from "../model/room";
 
 export class AddHotelUseCase {
   execute(hotelProps: AddHotelModel): HotelModel {
@@ -25,6 +26,7 @@ export class AddHotelUseCase {
       // they will be created later at addRoomUsecase
       roomsAvailable: 0,
       roomsBooked: 0,
+      rooms: [] as RoomModel[],
     };
   }
 }
