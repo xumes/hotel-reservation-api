@@ -24,6 +24,7 @@ export class UpdateHotelUseCase {
       id: existingHotelProps.id,
       roomsAvailable: existingHotelProps.roomsAvailable,
       roomsBooked: existingHotelProps.roomsBooked,
+      rooms: existingHotelProps.rooms,
     });
 
     return updatedHotel;

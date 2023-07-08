@@ -8,3 +8,7 @@ export interface RoomModel {
   price: number;
   status: string;
 }
+
+export interface AddRoomModel extends Omit<RoomModel, "status"> {
+  status?: string;
+}

@@ -1,19 +1,44 @@
 import { PrismaClient } from "@prisma/client";
-import { AddHotelModel, HotelModel } from "../../domain/model/hotel";
-import { AddHotelUseCase } from "../../domain/usecases/add-hotel";
+import { HotelModel } from "../../domain/model/hotel";
 
 export class HotelRepository {
   private prisma: PrismaClient;
-  private addHotelUsecase: AddHotelUseCase;
 
   constructor() {
     this.prisma = new PrismaClient();
-    this.addHotelUsecase = new AddHotelUseCase();
   }
 
-  async create(hotelProps: AddHotelModel): Promise<HotelModel> {
-    const hotel = this.addHotelUsecase.execute(hotelProps);
+  async getById(hotelId: string): Promise<HotelModel | null> {
+    const hotel = await this.prisma.hotel.findUnique({
+      where: { id: hotelId },
+      include: {
+        address: true,
+        rooms: true,
+      },
+    });
 
+    if (!hotel) {
+      return null;
+    }
+
+    const hotelModel: HotelModel = {
+      id: hotel.id,
+      name: hotel.name,
+      address: {
+        id: hotel.address.id,
+        street: hotel.address.street,
+        zipCode: hotel.address.zipCode,
+        country: hotel.address.country,
+      },
+      roomsAvailable: hotel.roomsAvailable,
+      roomsBooked: hotel.roomsBooked,
+      rooms: hotel.rooms,
+    };
+
+    return hotelModel;
+  }
+
+  async create(hotel: HotelModel): Promise<void> {
     const {
       id,
       name,
@@ -21,7 +46,6 @@ export class HotelRepository {
       roomsAvailable,
       roomsBooked,
     } = hotel;
-
     await this.prisma.hotel.create({
       data: {
         id,
@@ -38,7 +62,37 @@ export class HotelRepository {
         roomsBooked,
       },
     });
+  }
 
-    return hotel;
+  async update(hotel: HotelModel): Promise<void> {
+    const {
+      id,
+      name,
+      address: { street, zipCode, country },
+      roomsAvailable,
+      roomsBooked,
+    } = hotel;
+
+    await this.prisma.hotel.update({
+      where: {
+        id: id,
+      },
+      data: {
+        name,
+        address: {
+          update: {
+            street,
+            zipCode,
+            country,
+          },
+        },
+        roomsAvailable,
+        roomsBooked,
+      },
+      include: {
+        address: true,
+        rooms: true,
+      },
+    });
   }
 }

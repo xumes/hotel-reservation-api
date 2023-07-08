@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
-import { AddHotelModel } from "../../domain/model/hotel";
+import { AddHotelModel, HotelModel } from "../../domain/model/hotel";
 import { HotelService } from "../services/hotel-service";
 
-export class AddHotelController {
+export class UpdateHotelController {
   private hotelService: HotelService;
 
   constructor(hotelService: HotelService) {
@@ -12,10 +12,17 @@ export class AddHotelController {
   async handle(req: Request, res: Response): Promise<void> {
     try {
       const { name, address } = req.body as AddHotelModel;
+      const { hotel_id } = req.params;
 
-      const hotelProps: AddHotelModel = { name, address };
+      const hotelProps: AddHotelModel = {
+        name,
+        address,
+      };
 
-      const hotel = await this.hotelService.create(hotelProps);
+      const hotel: HotelModel = await this.hotelService.update(
+        hotel_id,
+        hotelProps
+      );
 
       res.status(201).json(hotel);
     } catch (err) {

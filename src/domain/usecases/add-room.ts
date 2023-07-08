@@ -1,27 +1,28 @@
 import { MissingParamError } from "../../@shared/errors/missing-param-error";
-import { RoomModel } from "../model/room";
+import { AddRoomModel, RoomModel, RoomStatus } from "../model/room";
 import {
   validateRoomNumber,
   validateRoomPrice,
-  validateRoomStatus,
 } from "../validators/room-validators";
 
 export class AddRoomUsecase {
-  execute(roomProps: RoomModel): RoomModel {
+  execute(roomProps: AddRoomModel): RoomModel {
     if (!this.validate(roomProps)) {
       throw new MissingParamError("All room data are required");
     }
 
-    return roomProps;
+    if (!("status" in roomProps)) {
+      roomProps.status = RoomStatus.AVAILABLE;
+    }
+
+    return roomProps as RoomModel;
   }
 
-  private validate(roomProps: RoomModel) {
-    const { number, price, status } = roomProps;
+  private validate(roomProps: AddRoomModel) {
+    const { number, price } = roomProps;
     return (
       // return true is all validators return true
-      validateRoomNumber(number) &&
-      validateRoomPrice(price) &&
-      validateRoomStatus(status)
+      validateRoomNumber(number) && validateRoomPrice(price)
     );
   }
 }
