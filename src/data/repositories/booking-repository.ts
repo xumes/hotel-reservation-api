@@ -52,4 +52,16 @@ export class BookingRepository {
 
     return bookingModel;
   }
+
+  async get(hotelId: string): Promise<any[]> {
+    const booking = this.prisma.booking.findMany({
+      where: { hotelId: hotelId },
+      include: {
+        hotel: true,
+        room: true,
+      },
+    });
+
+    return booking;
+  }
 }

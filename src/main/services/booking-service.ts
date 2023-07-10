@@ -42,4 +42,13 @@ export class BookingService {
 
     return await this.bookingRepository.create(booking);
   }
+
+  async getByHotelId(hotelId: string): Promise<any[]> {
+    const list = await this.bookingRepository.get(hotelId);
+    if (!list) {
+      throw new NotFoundError();
+    }
+
+    return list;
+  }
 }
