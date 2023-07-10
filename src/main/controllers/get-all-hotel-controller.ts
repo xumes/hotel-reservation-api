@@ -14,7 +14,6 @@ export class GetAllHotelController {
 
       res.status(200).json(hotel);
     } catch (err) {
-      // TODO: Handle the erros here
       console.log(err);
       res.status(500).end();
     }
