@@ -1,4 +1,3 @@
-import { Booking } from "@prisma/client";
 import { HotelRepository } from "../../data/repositories/hotel-repository";
 import { RoomRepository } from "../../data/repositories/room-repository";
 import { BookingService } from "../services/booking-service";
