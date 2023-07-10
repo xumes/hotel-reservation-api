@@ -31,6 +31,7 @@ describe("Add Room Usecase", () => {
           number: 1,
           price: 2,
           status: RoomStatus.AVAILABLE,
+          hotelId: "123",
         },
         expectedRoom: {
           roomId: 1,
@@ -47,6 +48,7 @@ describe("Add Room Usecase", () => {
           number: 1,
           price: 2,
           status: RoomStatus.UNAVAILABLE,
+          hotelId: "123",
         },
         expectedRoom: {
           roomId: 1,
@@ -62,6 +64,8 @@ describe("Add Room Usecase", () => {
           room: { id: 1 } as RoomModel,
           number: 1,
           price: 2,
+          status: "AVAILABLE" as RoomStatus,
+          hotelId: "123",
         },
         expectedRoom: {
           roomId: 1,

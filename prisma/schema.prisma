@@ -1,5 +1,7 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
+enum RoomStatus {
+  AVAILABLE
+  UNAVAILABLE
+}
 
 model Hotel {
   id             String    @id
@@ -21,11 +23,11 @@ model Address {
 }
 
 model Room {
-  id      Int       @id @default(autoincrement())
+  id      Int        @id @default(autoincrement())
   number  Int
   price   Int
-  status  String
-  hotel   Hotel     @relation(fields: [hotelId], references: [id])
+  status  RoomStatus
+  hotel   Hotel      @relation(fields: [hotelId], references: [id])
   hotelId String
   Booking Booking[]
 }
