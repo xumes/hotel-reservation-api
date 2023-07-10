@@ -95,4 +95,15 @@ export class HotelRepository {
       },
     });
   }
+
+  async getAll(): Promise<any[]> {
+    const hotelList = await this.prisma.hotel.findMany({
+      include: {
+        address: true,
+        rooms: true,
+      },
+    });
+
+    return hotelList;
+  }
 }

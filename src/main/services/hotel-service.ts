@@ -39,4 +39,20 @@ export class HotelService {
 
     return updatedHotel;
   }
+
+  async get(id: string): Promise<HotelModel> {
+    const hotel = await this.hotelRepository.getById(id);
+
+    if (!hotel) {
+      throw new NotFoundError();
+    }
+
+    return hotel;
+  }
+
+  async getAll(): Promise<any[]> {
+    const hotel = await this.hotelRepository.getAll();
+
+    return hotel;
+  }
 }
