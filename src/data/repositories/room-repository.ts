@@ -15,13 +15,14 @@ export class RoomRepository {
 
   async create(roomProps: AddRoomModel): Promise<RoomModel> {
     const { number, price, status, hotelId } = roomProps;
+    const roomStatus = status as RoomStatus;
 
     const roomModel = await this.prisma.$transaction(async (prisma) => {
       const newRoom = await prisma.room.create({
         data: {
           number,
           price,
-          status,
+          status: roomStatus,
           hotel: { connect: { id: hotelId } },
         },
         select: {
