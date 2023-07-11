@@ -5,7 +5,6 @@ const prisma = new PrismaClient();
 
 async function seed() {
   try {
-    // Create hotels
     const hotel1 = await prisma.hotel.create({
       data: {
         id: faker.string.uuid(),
@@ -57,7 +56,6 @@ async function seed() {
       },
     });
 
-    // Create rooms
     const rooms = [];
     for (let i = 1; i <= 20; i++) {
       const room = await prisma.room.create({
@@ -71,7 +69,6 @@ async function seed() {
       });
       rooms.push(room);
 
-      // Update hotel room counts
       const incrementAvailable = room.status === RoomStatus.AVAILABLE ? 1 : 0;
       const incrementBooked = room.status === RoomStatus.UNAVAILABLE ? 1 : 0;
 

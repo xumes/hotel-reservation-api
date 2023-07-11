@@ -19,7 +19,6 @@ export class UpdateHotelUseCase {
       throw new MissingParamError("Hotel address is required");
     }
 
-    // Copy the existingHotelProps while excluding roomsAvailable and roomsBooked
     const updatedHotel: HotelModel = Object.assign({}, newHotelProps, {
       id: existingHotelProps.id,
       roomsAvailable: existingHotelProps.roomsAvailable,

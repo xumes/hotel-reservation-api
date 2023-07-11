@@ -69,6 +69,6 @@ export class RoomRepository {
       },
     });
 
-    return room?.id || null;
+    return room?.id ?? null;
   }
 }

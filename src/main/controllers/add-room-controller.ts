@@ -21,7 +21,7 @@ export class AddRoomController {
       const { number, price, status } = req.body as AddRoomProps;
       const { hotelId } = req.params;
 
-      const roomStatus = status || "AVAILABLE";
+      const roomStatus = status ?? "AVAILABLE";
 
       const addRoomModel: AddRoomModel = {
         number: number,

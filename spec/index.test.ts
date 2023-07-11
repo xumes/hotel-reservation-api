@@ -1,4 +1,4 @@
-describe("Example Test", () => {
+describe("Fullcycle Jest test", () => {
   it("should pass", () => {
     expect(1 + 1).toBe(2);
   });

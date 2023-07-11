@@ -1,0 +1,480 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Fullcycle Hotel Reservation",
+    "version": "1.0.0",
+    "description": "API documentation for the Fullcycle Hotel Reservation"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000"
+    }
+  ],
+  "apis": ["./src/main/routes/*.ts"],
+  "paths": {
+    "/hotels": {
+      "post": {
+        "summary": "Create a new hotel",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddHotelModel"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Hotel created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HotelModel"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid or missing parameter",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorModel"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Hotel not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorModel"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/hotels/{hotelId}/rooms": {
+      "post": {
+        "summary": "Add a room to a hotel",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "hotelId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddRoomProps"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Room added successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RoomModel"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid or missing parameter",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorModel"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Hotel not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorModel"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/hotels/{hotelId}": {
+      "get": {
+        "summary": "Get hotel details",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "hotelId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Hotel details retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HotelModel"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Hotel not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorModel"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/hotels/": {
+      "get": {
+        "summary": "Get all hotels",
+        "responses": {
+          "200": {
+            "description": "Hotels retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/HotelModel"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/booking/{hotelId}": {
+      "post": {
+        "summary": "Make a booking for a hotel room",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "hotelId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BookingProps"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Booking created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BookingModel"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid or missing parameter",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorModel"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Hotel not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorModel"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "summary": "Get bookings for a hotel",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "hotelId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Bookings retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/BookingModel"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid or missing parameter",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorModel"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Hotel not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorModel"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "BookingModel": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "startDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "endDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "roomId": {
+            "type": "integer"
+          },
+          "hotelId": {
+            "type": "string"
+          }
+        }
+      },
+      "AddBookingModel": {
+        "type": "object",
+        "properties": {
+          "startDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "endDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "roomId": {
+            "type": "integer"
+          },
+          "hotelId": {
+            "type": "string"
+          }
+        }
+      },
+      "BookingProps": {
+        "type": "object",
+        "properties": {
+          "hotelId": {
+            "type": "string"
+          },
+          "roomNumber": {
+            "type": "integer"
+          },
+          "startDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "endDate": {
+            "type": "string",
+            "format": "date"
+          }
+        }
+      },
+      "AddressModel": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "street": {
+            "type": "string"
+          },
+          "zipCode": {
+            "type": "string"
+          },
+          "country": {
+            "type": "string"
+          }
+        }
+      },
+      "HotelModel": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "address": {
+            "$ref": "#/components/schemas/AddressModel"
+          },
+          "roomsAvailable": {
+            "type": "integer"
+          },
+          "roomsBooked": {
+            "type": "integer"
+          },
+          "rooms": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RoomModel"
+            }
+          }
+        }
+      },
+      "AddHotelModel": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "address": {
+            "$ref": "#/components/schemas/AddressModel"
+          }
+        }
+      },
+      "RoomStatus": {
+        "type": "string",
+        "enum": ["AVAILABLE", "UNAVAILABLE"]
+      },
+      "RoomModel": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "number": {
+            "type": "integer"
+          },
+          "price": {
+            "type": "number"
+          },
+          "status": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/RoomStatus"
+              },
+              {
+                "type": "string"
+              }
+            ]
+          },
+          "hotelId": {
+            "type": "string"
+          }
+        }
+      },
+      "AddRoomModel": {
+        "type": "object",
+        "properties": {
+          "number": {
+            "type": "integer"
+          },
+          "price": {
+            "type": "number"
+          },
+          "status": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/RoomStatus"
+              },
+              {
+                "type": "string"
+              }
+            ]
+          },
+          "hotelId": {
+            "type": "string"
+          }
+        }
+      },
+      "AddRoomProps": {
+        "type": "object",
+        "properties": {
+          "number": {
+            "type": "integer"
+          },
+          "price": {
+            "type": "number"
+          },
+          "status": {
+            "type": "string"
+          },
+          "hotelId": {
+            "type": "string"
+          }
+        }
+      },
+      "ErrorModel": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}
