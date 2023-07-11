@@ -1,6 +1,9 @@
 import { PrismaClient } from "@prisma/client";
 import { AddBookingModel, BookingModel } from "../../domain/model/booking";
-import { HOTEL_ROOM_INCREMENT } from "../../domain/model/room";
+import {
+  HOTEL_ROOM_BOOKED_STATUS,
+  HOTEL_ROOM_INCREMENT,
+} from "../../domain/model/room";
 
 export class BookingRepository {
   private prisma: PrismaClient;
@@ -25,7 +28,7 @@ export class BookingRepository {
       await prisma.room.update({
         where: { id: roomId },
         data: {
-          status: "UNAVAILABLE",
+          status: HOTEL_ROOM_BOOKED_STATUS,
         },
       });
 

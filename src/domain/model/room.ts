@@ -20,3 +20,4 @@ export interface AddRoomProps extends Omit<RoomModel, "id" | "status"> {
 }
 
 export const HOTEL_ROOM_INCREMENT = 1;
+export const HOTEL_ROOM_BOOKED_STATUS = "UNAVAILABLE";

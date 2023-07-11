@@ -46,6 +46,7 @@ export class HotelRepository {
       roomsAvailable,
       roomsBooked,
     } = hotel;
+
     await this.prisma.hotel.create({
       data: {
         id,
