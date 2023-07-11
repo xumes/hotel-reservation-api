@@ -39,6 +39,17 @@ Since I am running the migration and seeder at the moment docker is running the 
 - Find all reservations in a Hotel `GET /booking/{hotelId}`
   See details on our Swagger documentation running the aplication and navigating to `/docs`
 
+## Video Aulas
+
+- Aula 1:
+  [![Video Title](https://img.youtube.com/vi/1-dauWgGbBs/0.jpg)](https://youtu.be/1-dauWgGbBs)
+- Aula 2:
+  [![Video Title](https://img.youtube.com/vi/es79w5LFphU/0.jpg)](https://youtu.be/es79w5LFphU)
+- Aula 3:
+  [![Video Title](https://img.youtube.com/vi/XdqfFu9leXM/0.jpg)](https://youtu.be/XdqfFu9leXM)
+- Aula 4:
+  [![Video Title](https://img.youtube.com/vi/4zlOxxmpa54/0.jpg)](https://youtu.be/4zlOxxmpa54)
+
 ## Future releases
 
 Features that can be implemented to keep the game growing:
