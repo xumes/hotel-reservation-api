@@ -6,6 +6,7 @@ import { GetHotelController } from "../controllers/get-hotel-controller";
 import { GetAllHotelController } from "../controllers/get-all-hotel-controller";
 import { MakeBookingController } from "../controllers/make-booking-controller";
 import { GetBookingController } from "../controllers/get-booking-controller";
+import { UpdateHotelController } from "../controllers/update-hotel-controller";
 
 const hotelService = container.getHotelService();
 const roomService = container.getRoomservice();
@@ -13,6 +14,7 @@ const bookingService = container.getBookingService();
 
 const addHotelController = new AddHotelController(hotelService);
 const addRoomController = new AddRoomController(roomService);
+const updateHotelController = new UpdateHotelController(hotelService);
 const getHotelController = new GetHotelController(hotelService);
 const getAllHotelController = new GetAllHotelController(hotelService);
 const makeBookingController = new MakeBookingController(bookingService);
@@ -24,6 +26,10 @@ router.post("/hotels", addHotelController.handle.bind(addHotelController));
 router.post(
   "/hotels/:hotelId/rooms",
   addRoomController.handle.bind(addRoomController)
+);
+router.patch(
+  "/hotels/:hotelId",
+  updateHotelController.handle.bind(updateHotelController)
 );
 router.get(
   "/hotels/:hotelId",
