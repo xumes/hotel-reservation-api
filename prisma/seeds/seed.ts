@@ -70,6 +70,18 @@ async function seed() {
         },
       });
       rooms.push(room);
+
+      // Update hotel room counts
+      const incrementAvailable = room.status === RoomStatus.AVAILABLE ? 1 : 0;
+      const incrementBooked = room.status === RoomStatus.UNAVAILABLE ? 1 : 0;
+
+      await prisma.hotel.update({
+        where: { id: room.hotelId },
+        data: {
+          roomsAvailable: { increment: incrementAvailable },
+          roomsBooked: { increment: incrementBooked },
+        },
+      });
     }
 
     console.log("Seed data created successfully!");
