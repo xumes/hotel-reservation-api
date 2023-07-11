@@ -9,6 +9,8 @@ services:
       MYSQL_DATABASE: hotel_db
     volumes:
       - mysql-data:/var/lib/mysql
+    ports:
+      - 3306:3306 
 
   app:
     build:
@@ -23,7 +25,7 @@ services:
       - .docker/wait-for-db.sh:/app/wait-for-db.sh  # Add this line to mount the script
     ports:
       - 3000:3000
-    command: sh -c "/app/wait-for-db.sh db 3306 && npm run prisma:migrate && npm run prisma:seed && npm test && npm run dev"
+    command: sh -c "/app/wait-for-db.sh db 3306 && npm install && npm run prisma:migrate && npm run prisma:seed && npm test && npm run dev"
 
 volumes:
   mysql-data:

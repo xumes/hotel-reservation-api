@@ -23,4 +23,4 @@ COPY ./.docker/wait-for-db.sh /app/wait-for-db.sh
 EXPOSE 3000
 
 # Start the application
-CMD [ "sh", "-c", "/app/wait-for-db.sh db:3306 &&  npm test && npm run dev" ]
+CMD [ "sh", "-c", "/app/wait-for-db.sh db:3306 && npm test && npm run dev" ]
